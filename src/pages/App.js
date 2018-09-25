@@ -114,12 +114,14 @@ class App extends Component {
               <tbody>
                 <tr className="info">
                   <td className="danger"><input type="text" onChange={(e) => this.setState({name: e.target.value})}/></td>
-                  <td className="danger"><input type="text" onChange={(e) => this.setState({digit: e.target.value})}/></td>
+                  <td className="danger"><input type="text" onChange={(e) => this.setState({lastname: e.target.value})}/></td>
                   <td className="danger"><input type="number" onChange={(e) => this.setState({age: e.target.value})}/></td>
                   <td className="danger"><input type="number" onChange={(e) => this.setState({salary: e.target.value})}/></td>
                 </tr>
-                {this.state.users.filter(el => el.age > this.state.age).filter(el => el.salary > this.state.salary).map((user, i)=> (
-                  <ParseUser key={i} {...user} />
+                {this.state.users.filter(el => el.age > this.state.age).filter(el => el.salary > this.state.salary)
+                                  .filter(el => el.name.toLocaleLowerCase().indexOf(this.state.name.toLowerCase())!=-1)
+                                  .filter(el => el.lastname.toLocaleLowerCase().indexOf(this.state.lastname.toLowerCase())!=-1).map((user, i)=> (
+                                  <ParseUser key={i} {...user} />
                 ))}
                 </tbody>
               </table>
